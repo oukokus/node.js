@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>User list</title>
+    
+</head>
+<body>
+    <table>
+        <tr>
+            <th>名前</th>
+            <th>email</th>
+            <th>更新</th>
+            <th>削除</th>
+        </tr>
+    </table>
+    <!--こちらに基礎課題で言われてる内容を記述しましょう。ここから-->
+    <p id="textTag"></p>
+    <p id="text"></p>
+    <ul id="list"></ul>
+    <div id="objList"></div>
+    <input type="text" name="textBox" id="textBox">
+    <p id ="btnP"><input type="button" onclick="buttonClick()" value="検索"></p>
+    <!--こちらに基礎課題で言われてる内容を記述しましょう。ここまで-->
+    <script type="text/javascript">
+
+        // 参考例
+        let textTag = document.getElementById('textTag');
+        let NUMBER = `<%= number %>`;
+        textTag.innerHTML = NUMBER;
+        // ここからはapp.jsで作成した値をここでブラウザに出力するように機能を実装していきましょう。上記の参考例を元にやってみましょう。
+        
+        // 基礎課題01:画面に表示する機能作りましょう。
+        let getText = document.getElementById('text');
+        let NUMBER1 = `<%= number1 %>`;
+        getText.innerHTML = NUMBER1;
+
+        /*基礎課題02,03をやる前に
+        配列とオブジェクトリストをapp.jsから取得するときに以下のやり方が必要になります。
+        変数名は自由に決めてください。プロパティ名についてはapp.jsでオブジェクト内に格納したプロパティ名を使用してください。
+        以下使用する際は<%#の「#」部分を「=」に変更するよう気をつけてください。%>
+        let 変数名 = JSON.parse('<%# JSON.stringify(プロパティ名) %>'.replace(/&#34;/g, '"'));
+        */
+
+        /* 基礎課題02:HTML内にulタグを作成し、liタグでapp.jsで作成した情報を画面に表示して下さい。*/
+        let getList = document.getElementById('list');
+        let NUMBER2 = JSON.parse('<%= JSON.stringify(number2) %>'.replace(/&#34;/g, '"'));
+    for(let i = 0; i<NUMBER2.length; i++){
+        getList.insertAdjacentHTML('beforeend','<li>'+NUMBER2[i]+'</li>')
+    }
+        /* 基礎課題03:作成したオブジェクトリストをブラウザに出力して下さい。その場合以下の様に出力して下さい。
+        // 例）
+        // name: s.chiba
+        // email: s.chiba@gmail.com*/
+        let getObjList = document.getElementById('objList');
+        let NUMBER3 =JSON.parse('<%= JSON.stringify (number3) %>'.replace(/&#34;/g, '"'));
+        for(let c = 0; c<NUMBER3.length; c++){
+        getObjList.insertAdjacentHTML('beforeend','<p>'+"name : "+NUMBER3[c].name+'<br>'+"email : "+NUMBER3[c].email+'</p>')
+    }
+
+ let userList = JSON.parse('<%= JSON.stringify(users) %>'.replace(/&#34;/g, '"'));
+    console.log(userList)
+    let getBtnP = document.getElementById("btnP");
+ function buttonClick(){
+    let getTextBox = document.getElementById("textBox");
+  
+    for(let k = 0; k<userList.length; k++){
+ if(userList[k].id == getTextBox.value ){
+    getBtnP.insertAdjacentHTML('beforeend','<p>'+"name : "+userList[k].name+'<br>'+"email : "+userList[k].email+'</p>')
+ }
+    }
+ }
+ 
+    </script>
+</body>
+</html>
