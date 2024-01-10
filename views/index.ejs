@@ -3,23 +3,37 @@
     <head>
         <meta charset="UTF-8">
         <title>User list</title>
+        <link type="text/css" rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <table>
-            <tr>
+        <table id="table">
+            <tr class="trClass">
                 <th>名前</th>
                 <th>email</th>
                 <th>更新</th>
                 <th>削除</th>
             </tr>
+            
+<% for (let a = 0; a <users.length; a++) { %>
+                <tr><td><%- users[a].name %></td>
+                <td><%- users[a].email %></td>
+                <td><a href="/edit/<%= users[a].id %>">更新</a></td>
+                <td><a href="/delete/<%= users[a].id %>">削除</a></td>
+            </tr>
+                    <% } %>
+            
         </table>
+<!--実務課題1-->
+        <input type="text" name="textBox" id="textBox">
+        <p id="btnP"><input type="button" onclick="buttonClick()" value="検索"></p>
+
         <!--こちらに基礎課題で言われてる内容を記述しましょう。ここから-->
+        <br><br><br><br><br><br><br>
         <p id="textTag"></p>
         <p id="text"></p>
         <ul id="list"></ul>
         <div id="objList"></div>
-        <input type="text" name="textBox" id="textBox">
-        <p id="btnP"><input type="button" onclick="buttonClick()" value="検索"></p>
+
         <!--こちらに基礎課題で言われてる内容を記述しましょう。ここまで-->
         <script type="text/javascript">
 
@@ -57,8 +71,9 @@
                 getObjList.insertAdjacentHTML('beforeend', '<p>' + "name : " + NUMBER3[c].name + '<br>' + "email : " + NUMBER3[c].email + '</p>')
             }
 
-            /*node.js実務課題1*/
+    /*node.js実務課題1*/
             let userList = JSON.parse('<%= JSON.stringify(users) %>'.replace(/&#34;/g, '"'));
+            console.log(userList)
             let getBtnP = document.getElementById("btnP");
             function buttonClick() {
                 let getTextBox = document.getElementById("textBox");
@@ -68,7 +83,28 @@
                     }
                 }
             }
+    
+ //    Object.keys(userList).map(function(key){
+//
+   //     console.log(userList[key])
 
+   //  let getTable = document.getElementById("table")
+  // getTable.insertAdjacentHTML('beforeend', '<tr>'+'<td>' + xx + '</td>' +  '<td>' + "あ" + '</td>'+'</tr>')
+   // });
+      
+
+  /*node.js実務課題2*/
+ // for (let a = 0; a < userList.length; a++) {
+ //   //userList.forEach(function(){
+ //       let getTable = document.getElementById("table")
+ //       let name1= "<%- users[0].name %>";
+ //       let email1 = "<%- users[0].email %>";
+
+ //      }
+
+  
+
+   
         </script>
     </body>
 </html>
