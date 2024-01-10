@@ -2,9 +2,10 @@ const path = require('path');
 const express = require('express');
 const ejs = require('ejs');
 const app = express();
+const bodyParser = require('body-parser');
 const port = 3000;
 app.set('view engine', 'ejs');
-
+app.use(bodyParser.urlencoded({ extended: true }));
 const mysql = require('mysql2');
 
 const con = mysql.createConnection({
@@ -16,6 +17,8 @@ const con = mysql.createConnection({
 
 // mysqlからデータを持ってくる
 app.get('/', (req, res) => {
+  // cssファイルの取得
+app.use(express.static('assets'));
   const sql = "select * from users";
   // 参考例
   const num = 10000;
@@ -39,7 +42,10 @@ app.get('/', (req, res) => {
   {name:"m.chiba", email:"m.chiba@gmail.com"},
   {name:"t.suzuki", email:"t.suzuki@gmail.com"},
   {name:"t.hasegawa", email:"t.hasegawa@gmail.com"}
-]
+  ]
+
+
+
   // ==========ここまでの範囲で書くようにしましょう。==========
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
@@ -53,7 +59,9 @@ app.get('/', (req, res) => {
       number: num,
       number1: str,
       number2: ulList,
-      number3: obj
+      number3: obj,
+    
+     
     });
   });
 });
