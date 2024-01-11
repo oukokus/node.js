@@ -47,6 +47,19 @@ app.use(express.static('assets'));
 
 
   // ==========ここまでの範囲で書くようにしましょう。==========
+  app.post('/', (req, res) => {
+    const sql = "INSERT INTO users SET ?"
+    con.query(sql, req.body, function(err, result, fields) {
+      if (err) throw err;
+      console.log(result);
+      res.redirect('/');
+    });
+  });
+  
+  app.get('/create', (req, res) => {
+    res.sendFile(path.join(__dirname, 'html/form.html'))
+  });
+  
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
     res.render('index', {
@@ -61,7 +74,7 @@ app.use(express.static('assets'));
       number2: ulList,
       number3: obj,
     
-     
+
     });
   });
 });
