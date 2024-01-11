@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>入力フォーム</title>
+        <link type="text/css" rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <h1>入力フォーム</h1>
+        <!--ここに追加-->
+        <form action='/' id="formId" method="POST">
+            <p>name <input type="text" id="nameId" name="name" value=""></p>
+            <p id="nameText"></p>
+            <p>email <input type="email" id="emailId" name="email" value=""></p>
+            <p id="nameText2"></p>
+            <button type="submit" onclick="return btnClick()">送信</button>
+        </form>
+        <script>
+            let getName = document.getElementById("nameId");
+            let getEmail = document.getElementById("emailId");
+            let getNameText = document.getElementById("nameText");
+            let getNameText2 = document.getElementById("nameText2");
+            function btnClick() {
+                let trueFalse = true;
+                if (getName.value == "") {
+                    getNameText.innerHTML = "nameが未入力です";
+                    trueFalse = false;
+                } else if (/^[.a-zA-Z]*$/.test(getName.value)) {
+                    getNameText.textContent = "";
+                } else {
+                    getNameText.innerHTML = "nameは半角英語で記入してください";
+                    trueFalse = false;
+                }
+                if (getEmail.value == "") {
+                    getNameText2.innerHTML = "emailが未入力です";
+                    trueFalse = false;
+                } else if (/.+@.+\..+/.test(getEmail.value)) {
+                    getNameText2.textContent = "";
+                } else {
+                    getNameText2.innerHTML = "emailを正しく記入してください";
+                    trueFalse = false;
+                }
+                return trueFalse;
+            }
+        </script>
+    </body>
+</html>

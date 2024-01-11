@@ -13,6 +13,7 @@
                 <th>更新</th>
                 <th>削除</th>
             </tr>
+            <!--実務課題2-->
             <% for (let a=0; a <users.length; a++) { %>
                 <tr>
                     <td><%- users[a].name %></td>
@@ -21,8 +22,12 @@
                     <td><a href="/delete/<%= users[a].id %>">削除</a></td>
                 </tr>
                 <% } %>
+
         </table>
+         <!--実務課題3-->
+         <p id><a href="/create">ユーザーの追加</a></p>
         <!--実務課題1-->
+        <p>ID検索</p>
         <input type="text" name="textBox" id="textBox">
         <p id="btnP"><input type="button" onclick="buttonClick()" value="検索"></p>
         <!--こちらに基礎課題で言われてる内容を記述しましょう。ここから-->
@@ -80,6 +85,8 @@
                     }
                 }
             }
+
+
         </script>
     </body>
 </html>
